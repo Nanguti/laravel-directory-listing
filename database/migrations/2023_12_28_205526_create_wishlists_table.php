@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('job_listings', function (Blueprint $table) {
-            $table->string('date_published');
-            $table->text('job_key_info');
-            $table->longText('job_details');
-            $table->text('application_method');
+        Schema::create('wishlists', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -24,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('job_listings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('wishlists');
     }
 };

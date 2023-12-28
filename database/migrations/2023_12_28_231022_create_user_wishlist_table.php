@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_listings', function (Blueprint $table) {
+        Schema::create('account_wishlist', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('industry');
-            $table->text('description');
+            $table->foreignId('account_id')->constrained();
+            $table->foreignId('property_id')->constrained('listings');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_listings');
+        Schema::dropIfExists('account_wishlist');
     }
 };
