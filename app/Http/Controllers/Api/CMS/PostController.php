@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\CMS;
+use App\Http\Controllers\Controller;
 
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\Attributes\PostCondition;
+
 
 class PostController extends Controller
 {

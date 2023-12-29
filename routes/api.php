@@ -2,14 +2,14 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookingController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Api\ListingController;
+use App\Http\Controllers\Api\CMS\PostCategoryController;
+use App\Http\Controllers\Api\CMS\PostCommentController;
 use App\Http\Controllers\Api\RatingReviewController;
 use App\Http\Controllers\Api\WishlistController;
-use App\Http\Controllers\PostController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\CMS\PostController;
+use App\Http\Controllers\Api\CMS\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,13 +39,13 @@ Route::get('/posts/list', [PostController::class, 'posts']);
 Route::post('/post/detail', [PostController::class, 'postDetail']);
 
 // comments
-Route::post('/add/comment', [CommentController::class, 'store']);
-Route::post('/update/comment', [CommentController::class, 'update']);
-Route::delete('/delete/comment/{id}', [CommentController::class, 'destroy']);
+Route::post('/add/comment', [PostCommentController::class, 'store']);
+Route::post('/update/comment', [PostCommentController::class, 'update']);
+Route::delete('/delete/comment/{id}', [PostCommentController::class, 'destroy']);
 
 // categories
-Route::get('/category/list', [CategoryController::class, 'categories']);
-Route::post('/category/detail', [CategoryController::class, 'categoryDetail']);
+Route::get('/category/list', [PostCategoryController::class, 'categories']);
+Route::post('/category/detail', [PostCategoryController::class, 'categoryDetail']);
 
 Route::post('/contactus', [ContactController::class, 'submitForm']);
 Route::post('/category/posts', [PostController::class,'postsByCategory']);
