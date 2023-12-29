@@ -22,26 +22,20 @@ class WishlistController extends Controller
         return response()->json(['wishlist_item' => $wishlistItem]);
     }
 
-    public function store(Request $request)
+    public function store(StoreWishlistRequest $request)
     {
-        $request->validate([
-            'account_id' => 'required|exists:accounts,id',
-            'property_id' => 'required|exists:listings,id',
-        ]);
+        $data = $request->validated();
 
-        $wishlistItem = Wishlist::create($request->all());
+        $wishlistItem = Wishlist::create($data);
 
         return response()->json(['wishlist_item' => $wishlistItem], 201);
     }
 
-    public function update(Request $request, Wishlist $wishlistItem)
+    public function update(UpdateWishlistRequest $request, Wishlist $wishlistItem)
     {
-        $request->validate([
-            'account_id' => 'required|exists:accounts,id',
-            'property_id' => 'required|exists:listings,id',
-        ]);
+        $data = $request->validated();
 
-        $wishlistItem->update($request->all());
+        $wishlistItem->update($data);
 
         return response()->json(['wishlist_item' => $wishlistItem]);
     }

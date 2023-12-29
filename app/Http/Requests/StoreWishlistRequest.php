@@ -11,7 +11,7 @@ class StoreWishlistRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreWishlistRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'account_id' => 'required|exists:accounts,id',
+            'property_id' => 'required|exists:listings,id',
         ];
     }
 }

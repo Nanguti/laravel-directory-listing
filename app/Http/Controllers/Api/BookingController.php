@@ -24,40 +24,17 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'client_id' => 'required|exists:accounts,id',
-            'property_id' => 'required|exists:listings,id',
-            'check_in_date' => 'required|date',
-            'check_out_date' => 'required|date|after:check_in_date',
-            'total_charges' => 'required|numeric',
-            'booking_status' => 'required|in:pending,canceled,confirmed',
-            'guest_count' => 'required|integer',
-            'special_requests' => 'nullable',
-            'payment_method' => 'required|in:Cash,Mpesa,Credit Card,Paypal',
-            'payment_status' => 'required|in:Paid,Pending,Failed',
-        ]);
-
-        $booking = Booking::create($request->all());
+        $data = $request->validated();
+        $booking = Booking::create($data);
 
         return response()->json(['booking' => $booking], 201);
     }
 
     public function update(Request $request, Booking $booking)
     {
-        $request->validate([
-            'client_id' => 'required|exists:accounts,id',
-            'property_id' => 'required|exists:listings,id',
-            'check_in_date' => 'required|date',
-            'check_out_date' => 'required|date|after:check_in_date',
-            'total_charges' => 'required|numeric',
-            'booking_status' => 'required|in:pending,canceled,confirmed',
-            'guest_count' => 'required|integer',
-            'special_requests' => 'nullable',
-            'payment_method' => 'required|in:Cash,Mpesa,Credit Card,Paypal',
-            'payment_status' => 'required|in:Paid,Pending,Failed',
-        ]);
+        $data = $request->validated();
 
-        $booking->update($request->all());
+        $booking->update($data);
 
         return response()->json(['booking' => $booking]);
     }

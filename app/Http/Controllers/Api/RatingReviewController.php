@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\UpdateRatingReviewRequest;
 use App\Models\RatingReview;
-use App\Http\Requests\StoreReviewRequest;
-use App\Http\Requests\UpdateReviewRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreRatingReviewRequest;
 
 class RatingReviewController extends Controller
 {
@@ -22,50 +21,20 @@ class RatingReviewController extends Controller
         return response()->json(['review' => $review]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRatingReviewRequest $request)
     {
-        $request->validate([
-            'client_id' => 'required|exists:accounts,id',
-            'property_id' => 'required|exists:listings,id',
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required',
-            'anonymous' => 'boolean',
-            'verified_booking' => 'boolean',
-            'recommended' => 'boolean',
-            'response_comment' => 'nullable',
-            'helpful_count' => 'integer',
-            'reported' => 'boolean',
-            'reported_count' => 'integer',
-            'flagged' => 'boolean',
-            'flagged_reason' => 'nullable',
-            'images' => 'nullable|json',
-        ]);
+        $data = $request->validated();
 
-        $review = RatingReview::create($request->all());
+        $review = RatingReview::create($data);
 
         return response()->json(['review' => $review], 201);
     }
 
-    public function update(Request $request, RatingReview $review)
+    public function update(UpdateRatingReviewRequest $request, RatingReview $review)
     {
-        $request->validate([
-            'client_id' => 'required|exists:accounts,id',
-            'property_id' => 'required|exists:listings,id',
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required',
-            'anonymous' => 'boolean',
-            'verified_booking' => 'boolean',
-            'recommended' => 'boolean',
-            'response_comment' => 'nullable',
-            'helpful_count' => 'integer',
-            'reported' => 'boolean',
-            'reported_count' => 'integer',
-            'flagged' => 'boolean',
-            'flagged_reason' => 'nullable',
-            'images' => 'nullable|json',
-        ]);
+        $data = $request->validated();
 
-        $review->update($request->all());
+        $review->update($data);
 
         return response()->json(['review' => $review]);
     }

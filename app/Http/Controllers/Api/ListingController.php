@@ -22,54 +22,20 @@ class ListingController extends Controller
         return response()->json(['listing' => $listing]);
     }
 
-    public function store(Request $request)
+    public function store(StoreListingRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'owner_id' => 'required|exists:accounts,id',
-            'description' => 'required',
-            'address' => 'required',
-            'city' => 'nullable',
-            'county' => 'nullable',
-            'country' => 'nullable',
-            'price_per_night' => 'required|numeric',
-            'number_of_rooms' => 'required|integer',
-            'number_of_bathrooms' => 'required|integer',
-            'max_occupancy' => 'required|integer',
-            'property_type' => 'required',
-            'amenities' => 'required|json',
-            'main_image' => 'required',
-            'images' => 'nullable|json',
-            'rating' => 'required|numeric',
-        ]);
+        $data = $request->validated();
 
-        $listing = Listing::create($request->all());
+        $listing = Listing::create($data);
 
         return response()->json(['listing' => $listing], 201);
     }
 
-    public function update(Request $request, Listing $listing)
+    public function update(UpdateListingRequest $request, Listing $listing)
     {
-        $request->validate([
-            'name' => 'required',
-            'owner_id' => 'required|exists:accounts,id',
-            'description' => 'required',
-            'address' => 'required',
-            'city' => 'nullable',
-            'county' => 'nullable',
-            'country' => 'nullable',
-            'price_per_night' => 'required|numeric',
-            'number_of_rooms' => 'required|integer',
-            'number_of_bathrooms' => 'required|integer',
-            'max_occupancy' => 'required|integer',
-            'property_type' => 'required',
-            'amenities' => 'required|json',
-            'main_image' => 'required',
-            'images' => 'nullable|json',
-            'rating' => 'required|numeric',
-        ]);
-
-        $listing->update($request->all());
+        $data = $request->validated();
+    
+        $listing->update($data);
 
         return response()->json(['listing' => $listing]);
     }

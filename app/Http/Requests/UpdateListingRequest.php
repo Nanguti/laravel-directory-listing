@@ -11,7 +11,7 @@ class UpdateListingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,22 @@ class UpdateListingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'owner_id' => 'required|exists:accounts,id',
+            'description' => 'required',
+            'address' => 'required',
+            'city' => 'nullable',
+            'county' => 'nullable',
+            'country' => 'nullable',
+            'price_per_night' => 'required|numeric',
+            'number_of_rooms' => 'required|integer',
+            'number_of_bathrooms' => 'required|integer',
+            'max_occupancy' => 'required|integer',
+            'property_type' => 'required',
+            'amenities' => 'required|json',
+            'main_image' => 'required',
+            'images' => 'nullable|json',
+            'rating' => 'required|numeric',
         ];
     }
 }

@@ -11,7 +11,7 @@ class StoreBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'client_id' => 'required|exists:accounts,id',
+            'property_id' => 'required|exists:listings,id',
+            'check_in_date' => 'required|date',
+            'check_out_date' => 'required|date|after:check_in_date',
+            'total_charges' => 'required|numeric',
+            'booking_status' => 'required|in:pending,canceled,confirmed',
+            'guest_count' => 'required|integer',
+            'special_requests' => 'nullable',
+            'payment_method' => 'required|in:Cash,Mpesa,Credit Card,Paypal',
+            'payment_status' => 'required|in:Paid,Pending,Failed',
         ];
     }
 }

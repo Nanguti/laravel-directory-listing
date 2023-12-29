@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBookingRequest extends FormRequest
+class UpdateRatingReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,18 @@ class UpdateBookingRequest extends FormRequest
         return [
             'client_id' => 'required|exists:accounts,id',
             'property_id' => 'required|exists:listings,id',
-            'check_in_date' => 'required|date',
-            'check_out_date' => 'required|date|after:check_in_date',
-            'total_charges' => 'required|numeric',
-            'booking_status' => 'required|in:pending,canceled,confirmed',
-            'guest_count' => 'required|integer',
-            'special_requests' => 'nullable',
-            'payment_method' => 'required|in:Cash,Mpesa,Credit Card,Paypal',
-            'payment_status' => 'required|in:Paid,Pending,Failed',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required',
+            'anonymous' => 'boolean',
+            'verified_booking' => 'boolean',
+            'recommended' => 'boolean',
+            'response_comment' => 'nullable',
+            'helpful_count' => 'integer',
+            'reported' => 'boolean',
+            'reported_count' => 'integer',
+            'flagged' => 'boolean',
+            'flagged_reason' => 'nullable',
+            'images' => 'nullable|json',
         ];
     }
 }
