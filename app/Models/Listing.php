@@ -28,10 +28,17 @@ class Listing extends Model
         'rating',
         'created_at',
         'updated_at',
+        'accommodation_type_id'
     ];
 
     public function reviews()
     {
         return $this->hasMany(RatingReview::class, 'property_id');
+    }
+
+
+    public function accommodationType()
+    {
+        return $this->belongsTo(AccommodationType::class);
     }
 }
