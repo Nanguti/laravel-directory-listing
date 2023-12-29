@@ -15,15 +15,15 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if (!Auth::attempt($credentials, $request->remember)) {
+        if (!Auth::guard('account')->attempt($credentials, $request->remember)) {
             return response([
                 'message' => 'The provided credentials are invalid. Please try again.',
             ], 401);
         }
 
-        $account = Auth::account();
+        $account = Auth::guard('account')->user();
         $token = $account->createToken('main')->plainTextToken;
-
+        $account->makeHidden(['password']);
         return response()->json([
             'account' => $account,
             'token' => $token,
@@ -33,8 +33,17 @@ class AuthController extends Controller
     public function signup(SignupRequest $request)
     {
         $data = $request->validated();
-        $account = Account::create($data);
+        $account = Account::create([
+            'full_name' => $data['full_name'],
+            'email' => $data['email'],
+            'phone_number' => $data['phone_number'],
+            'password' => bcrypt($data['password']),
+            'address' => $data['address'] ?? null,
+            'bio' => $data['bio'] ?? null,
+            'profile_picture' => $data['profile_picture'] ?? null
+        ]);
         $token = $account->createToken('main')->plainTextToken;
+        $account->makeHidden(['password']);
         return response()->json([
             'account' => $account, 
             'token' => $token

@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\JobListingController;
+use App\Http\Controllers\Api\ListingController;
+use App\Http\Controllers\Api\RatingReviewController;
+use App\Http\Controllers\Api\WishlistController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\TutorialController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +23,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:account')->group(function () {
+//     Route::get('/all/listings', [ListingController::class, 'index']);   
+// });
+
+Route::apiResource('listings', ListingController::class);
+Route::apiResource('rating-reviews', RatingReviewController::class);
+Route::apiResource('bookings', BookingController::class);
+Route::apiResource('account-wishlist', WishlistController::class);
+
+
 
 // post routes
 Route::get('/posts/list', [PostController::class, 'posts']);
@@ -37,15 +47,8 @@ Route::delete('/delete/comment/{id}', [CommentController::class, 'destroy']);
 Route::get('/category/list', [CategoryController::class, 'categories']);
 Route::post('/category/detail', [CategoryController::class, 'categoryDetail']);
 
-//job listing
-Route::get('/import/jobs', [JobListingController::class, 'importJobs']);
-Route::get('/jobs/list', [JobListingController::class, 'jobList']);
-Route::post('/job/details', [JobListingController::class, 'jobDetail']);
-Route::post('/search/job', [JobListingController::class, 'autocompleteSearch']);
-
 Route::post('/contactus', [ContactController::class, 'submitForm']);
-
-// tutorials
-Route::get('/youtube-tutorials', [TutorialController::class,'index']);
-Route::post('/category/tutorials', [TutorialController::class,'getTutorialsByCategory']);
 Route::post('/category/posts', [PostController::class,'postsByCategory']);
+
+Route::post('/account/login', [AuthController::class, 'login']);
+Route::post('/account/signup', [AuthController::class, 'signup']);

@@ -25,11 +25,10 @@ class SignupRequest extends FormRequest
             'full_name' => 'required|string|min:3',
             'email' => 'required|email|string|min:6|unique:accounts',
             'phone_number' => 'required|string|digits_between:10,12',
-            'password' => 'required|string|min:8|confirmed|password',
+            'password' => 'required|string|min:8|confirmed',
             'address' => 'string',
             'bio'=> 'string|min:6',
             'profile_picture' => [
-                'required',
                 'mimetypes' => ['image/jpeg', 'image/png', 'image/gif'],
                 'max' => 2048,
                 'dimensions:min_width=100,min_height=100',

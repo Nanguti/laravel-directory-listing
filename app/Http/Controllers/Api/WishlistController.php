@@ -1,66 +1,55 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller;
 
 use App\Models\Wishlist;
 use App\Http\Requests\StoreWishlistRequest;
 use App\Http\Requests\UpdateWishlistRequest;
+use Illuminate\Http\Request;
 
 class WishlistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $wishlistItems = Wishlist::all();
+
+        return response()->json(['wishlist_items' => $wishlistItems]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(Wishlist $wishlistItem)
     {
-        //
+        return response()->json(['wishlist_item' => $wishlistItem]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreWishlistRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'account_id' => 'required|exists:accounts,id',
+            'property_id' => 'required|exists:listings,id',
+        ]);
+
+        $wishlistItem = Wishlist::create($request->all());
+
+        return response()->json(['wishlist_item' => $wishlistItem], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Wishlist $wishlist)
+    public function update(Request $request, Wishlist $wishlistItem)
     {
-        //
+        $request->validate([
+            'account_id' => 'required|exists:accounts,id',
+            'property_id' => 'required|exists:listings,id',
+        ]);
+
+        $wishlistItem->update($request->all());
+
+        return response()->json(['wishlist_item' => $wishlistItem]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Wishlist $wishlist)
+    public function destroy(Wishlist $wishlistItem)
     {
-        //
-    }
+        $wishlistItem->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateWishlistRequest $request, Wishlist $wishlist)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Wishlist $wishlist)
-    {
-        //
+        return response()->json(['message' => 'Wishlist item deleted successfully']);
     }
 }
