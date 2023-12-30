@@ -13,7 +13,7 @@ class ListingPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->can('view listings');
     }
 
     /**
@@ -21,7 +21,7 @@ class ListingPolicy
      */
     public function view(User $user, Listing $listing): bool
     {
-        //
+        return $user->can('view listings details');
     }
 
     /**
@@ -29,7 +29,7 @@ class ListingPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->can('create listings');
     }
 
     /**
@@ -37,7 +37,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing): bool
     {
-        //
+        return $user->can('edit listings');
     }
 
     /**
@@ -45,7 +45,7 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing): bool
     {
-        //
+        return $user->can('delete listings');
     }
 
     /**
@@ -53,7 +53,7 @@ class ListingPolicy
      */
     public function restore(User $user, Listing $listing): bool
     {
-        //
+        return $user->can('restore listings');
     }
 
     /**
@@ -61,6 +61,6 @@ class ListingPolicy
      */
     public function forceDelete(User $user, Listing $listing): bool
     {
-        //
+        return $user->can('force delete listings');
     }
 }

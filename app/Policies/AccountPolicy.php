@@ -13,7 +13,7 @@ class AccountPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->can('view accounts');
     }
 
     /**
@@ -21,7 +21,7 @@ class AccountPolicy
      */
     public function view(User $user, Account $account): bool
     {
-        //
+        return $user->can('view accounts details');
     }
 
     /**
@@ -29,7 +29,7 @@ class AccountPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->can('create accounts');
     }
 
     /**
@@ -37,7 +37,7 @@ class AccountPolicy
      */
     public function update(User $user, Account $account): bool
     {
-        //
+        return $user->can('edit accounts');
     }
 
     /**
@@ -45,7 +45,7 @@ class AccountPolicy
      */
     public function delete(User $user, Account $account): bool
     {
-        //
+        return $user->can('delete accounts');
     }
 
     /**
@@ -53,7 +53,7 @@ class AccountPolicy
      */
     public function restore(User $user, Account $account): bool
     {
-        //
+        return $user->can('restore accounts');
     }
 
     /**
@@ -61,6 +61,6 @@ class AccountPolicy
      */
     public function forceDelete(User $user, Account $account): bool
     {
-        //
+        return $user->can('force delete acounts');
     }
 }

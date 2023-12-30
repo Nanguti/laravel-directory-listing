@@ -13,7 +13,7 @@ class WishlistPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->can('view wishlists');
     }
 
     /**
@@ -21,7 +21,7 @@ class WishlistPolicy
      */
     public function view(User $user, Wishlist $wishlist): bool
     {
-        //
+        return $user->can('view wishlists details');
     }
 
     /**
@@ -29,7 +29,7 @@ class WishlistPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->can('create wishlists');
     }
 
     /**
@@ -37,7 +37,7 @@ class WishlistPolicy
      */
     public function update(User $user, Wishlist $wishlist): bool
     {
-        //
+        return $user->can('edit wishlists');
     }
 
     /**
@@ -45,7 +45,7 @@ class WishlistPolicy
      */
     public function delete(User $user, Wishlist $wishlist): bool
     {
-        //
+        return $user->can('delete wishlists');
     }
 
     /**
@@ -53,7 +53,7 @@ class WishlistPolicy
      */
     public function restore(User $user, Wishlist $wishlist): bool
     {
-        //
+        return $user->can('restore wishlists');
     }
 
     /**
@@ -61,6 +61,6 @@ class WishlistPolicy
      */
     public function forceDelete(User $user, Wishlist $wishlist): bool
     {
-        //
+        return $user->can('force delete wishlists');
     }
 }

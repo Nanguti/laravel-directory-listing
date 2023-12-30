@@ -12,4 +12,16 @@ class Account extends Authenticatable
     protected $guard = 'account';
 
     protected $fillable = ['full_name', 'email', 'phone_number', 'password','address', 'profile_picture', 'bio'];
+
+    public function listing()
+    {
+        return $this->hasMany(Listing::class);
+    }
+    public function bookng(){
+        return $this->hasMany(Booking::class);
+    }
+    public function ratingreview()
+    {
+        return $this->hasMany(RatingReview::class);
+    }
 }

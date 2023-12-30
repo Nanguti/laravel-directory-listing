@@ -5,8 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Listing;
 use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class ListingController extends Controller
 {

@@ -13,7 +13,8 @@ class BookingPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->can('view bookings');
+
     }
 
     /**
@@ -21,7 +22,8 @@ class BookingPolicy
      */
     public function view(User $user, Booking $booking): bool
     {
-        //
+        return $user->can('view booking details');
+
     }
 
     /**
@@ -29,7 +31,8 @@ class BookingPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->can('create bookings');
+
     }
 
     /**
@@ -37,7 +40,8 @@ class BookingPolicy
      */
     public function update(User $user, Booking $booking): bool
     {
-        //
+        return $user->can('edit bookings');
+
     }
 
     /**
@@ -45,7 +49,8 @@ class BookingPolicy
      */
     public function delete(User $user, Booking $booking): bool
     {
-        //
+        return $user->can('delete bookings');
+
     }
 
     /**
@@ -53,7 +58,8 @@ class BookingPolicy
      */
     public function restore(User $user, Booking $booking): bool
     {
-        //
+        return $user->can('restore bookings');
+
     }
 
     /**
@@ -61,6 +67,7 @@ class BookingPolicy
      */
     public function forceDelete(User $user, Booking $booking): bool
     {
-        //
+        return $user->can('force delete bookings');
+
     }
 }
