@@ -41,4 +41,9 @@ class Listing extends Model
     {
         return $this->belongsTo(AccommodationType::class);
     }
+
+    public function amenities()
+    {
+        return $this->belongsToMany(Amenity::class);
+    }
 }
