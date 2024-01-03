@@ -14,20 +14,11 @@ class Listing extends Model
         'description',
         'address',
         'city',
-        'state',
+        'county',
         'country',
         'zip_code',
-        'price_per_night',
-        'number_of_rooms',
-        'number_of_bathrooms',
-        'max_occupancy',
-        'property_type',
-        'amenities',
         'main_image',
-        'images',
         'rating',
-        'created_at',
-        'updated_at',
         'accommodation_type_id'
     ];
 

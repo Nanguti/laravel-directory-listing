@@ -13,7 +13,7 @@ class Booking extends Model
         'client_id', 'property_id', 'check_in_date', 'check_out_date', 'total_charges', 'booking_status', 'guest_count', 'special_requests', 'payment_status', 'payment_method', 'booking_code'
     ];
 
-    public function booking()
+    public function account()
     {
         return $this->belongsTo(Account::class);
     }

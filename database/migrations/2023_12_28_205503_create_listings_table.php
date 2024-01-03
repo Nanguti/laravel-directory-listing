@@ -20,15 +20,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('county')->nullable();
             $table->string('country')->default('Kenya');
-            $table->decimal('price_per_night', 10, 2);
-            $table->integer('number_of_rooms')->default(1);
-            $table->integer('number_of_bathrooms')->default(1);
-            $table->integer('max_occupancy');
-            $table->string('property_type');
-            $table->json('amenities');
             $table->string('main_image');
-            $table->json('images')->nullable();
-            $table->decimal('rating', 3, 2)->default(0.0);
             $table->timestamps();
         });
     }

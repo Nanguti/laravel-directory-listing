@@ -3,7 +3,13 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Booking extends Resource
@@ -28,7 +34,7 @@ class Booking extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'client_id', 'property_id', 'check_in_date', 'check_out_date', 'total_charges', 'booking_status', 'guest_count', 'special_requests', 'payment_status', 'payment_method', 'booking_code'
     ];
 
     /**
@@ -41,6 +47,29 @@ class Booking extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make('Account'),
+            BelongsTo::make('Listing'),
+            DateTime::make('Check In Date'),
+            DateTime::make('Check Out Date'),
+            Number::make('Phone Number'),
+            Select::make('Booking Status')->options([
+                'pending' => 'Pending',
+                'Cancelled' => 'Cancelled',
+                'Confirmed' => 'Confirmed'
+            ]),
+            Number::make('Guest Count'),
+            TextArea::make('Special Requests'),
+            Select::make('Payment Status')->options([
+                'Paid' => 'Paid',
+                'Pending' => 'Pending',
+                'Failed' => 'Failed'
+            ]),
+            Select::make('Payment Mathod')->options([
+                'Cash' => 'Cash',
+                'Mpesa' => 'Mpesa',
+                'Credit Card' => 'Credit Card',
+            ]),
+            Text::make('Booking Code')
         ];
     }
 

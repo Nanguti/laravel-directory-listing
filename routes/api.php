@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RatingReviewController;
 use App\Http\Controllers\Api\WishlistController;
 use App\Http\Controllers\Api\CMS\PostController;
 use App\Http\Controllers\Api\CMS\TagController;
+use App\Http\Controllers\Api\AccommodationTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::post('/add/listing', [ListingController::class, 'store']);
 Route::apiResource('rating-reviews', RatingReviewController::class);
 Route::apiResource('bookings', BookingController::class);
 Route::apiResource('account-wishlist', WishlistController::class);
+Route::get('/accommodation/types', [AccommodationTypeController::class, 'list']);
 
 
 

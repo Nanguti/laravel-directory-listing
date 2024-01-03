@@ -4,6 +4,10 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Account extends Resource
@@ -20,7 +24,7 @@ class Account extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'full_name';
 
     /**
      * The columns that should be searched.
@@ -28,7 +32,7 @@ class Account extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'full_name', 'email', 'phone_number', 'password','address', 'profile_picture', 'bio'
     ];
 
     /**
@@ -41,6 +45,12 @@ class Account extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Full Name')->required()->sortable(),
+            Text::make('Email')->required()->sortable(),
+            Number::make('Phone Number')->required()->sortable(),
+            Text::make('Address'), 
+            Image::make('Profile Picture'),
+            Textarea::make('Bio')
         ];
     }
 
