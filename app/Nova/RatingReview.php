@@ -3,7 +3,11 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class RatingReview extends Resource
@@ -55,6 +59,12 @@ class RatingReview extends Resource
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make('Account')->readonly(),
+            BelongsTO::make('Listing')->readonly(),
+            Number::make('Rating')->readonly(),
+            Textarea::make('Comment')->readonly(),
+            Boolean::make('Anonymous')->readonly(),
+            Boolean::make('Verified Booking')->readonly(),
         ];
     }
 

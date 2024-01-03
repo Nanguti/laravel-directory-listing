@@ -24,13 +24,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:account')->group(function () {
-//     Route::get('/all/listings', [ListingController::class, 'index']);   
-// });
+Route::middleware('auth:account')->group(function () {
+    Route::get('reviews/history', [RatingReviewController::class, 'history']); 
+});
 
 Route::apiResource('listings', ListingController::class);
 Route::post('/add/listing', [ListingController::class, 'store']);
-Route::apiResource('rating-reviews', RatingReviewController::class);
 Route::apiResource('bookings', BookingController::class);
 Route::apiResource('account-wishlist', WishlistController::class);
 Route::get('/accommodation/types', [AccommodationTypeController::class, 'list']);

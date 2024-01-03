@@ -26,4 +26,14 @@ class RatingReview extends Model
         'images',    
     ];
 
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function listing()
+    {
+        return $this->belongsTo(Listing::class);
+    }
+
 }
