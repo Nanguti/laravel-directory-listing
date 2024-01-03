@@ -15,4 +15,8 @@ class AccommodationType extends Model
         return $this->hasMany(Listing::class);
     }
 
+    public function getListByType($slug){
+        return AccommodationType::with('listings')->where('slug',$slug)->first();
+    }
+
 }

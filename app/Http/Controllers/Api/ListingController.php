@@ -8,19 +8,29 @@ use App\Http\Requests\UpdateListingRequest;
 use App\Models\PropertyImage;
 use App\Models\Amenity;
 use Cloudinary\Cloudinary;
+use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
     public function index()
     {
-        $listings = Listing::all();
+        $listings = Listing::orderBy('id', 'desc')->paginate(12);
 
         return response()->json(['listings' => $listings]);
     }
 
-    public function show(Listing $listing)
+    public function listByCategories(Request $request)
     {
-        return response()->json(['listing' => $listing]);
+        $categoryList = Listing::getListByType($request->slug);
+
+    }
+
+    public function show(Request $request)
+    {
+       $listDetails = Listing::getDetails($request->id);
+       return response()->json([
+        'listDetails' => $listDetails,
+       ], 200);
     }
 
     public function store(StoreListingRequest $request)
@@ -70,4 +80,6 @@ class ListingController extends Controller
             'amenities' => $amenities
         ]);
     }
+
+
 }

@@ -42,4 +42,8 @@ class Listing extends Model
     {
         return $this->belongsTo(Account::class, 'owner_id');
     }
+
+    public static function getDetails($list_id){
+        return Listing::with('account')->where('id', $list_id)->first();
+    }
 }
