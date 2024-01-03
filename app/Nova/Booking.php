@@ -26,10 +26,10 @@ class Booking extends Resource
      *
      * @var string
      */
-
-     public function title(){
-        return __('Account');
-     }
+     public function title()
+    {
+        return __($this->listing->name);
+    }
     /**
      * The columns that should be searched.
      *
