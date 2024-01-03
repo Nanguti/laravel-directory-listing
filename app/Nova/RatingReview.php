@@ -29,6 +29,20 @@ class RatingReview extends Resource
      */
     public static $search = [
         'id',
+        'account_id',
+        'property_id',
+        'rating',
+        'comment',
+        'anonymous',
+        'verified_booking',
+        'recommended',
+        'response_comment',
+        'helpful_count',
+        'reported',
+        'reported_count',
+        'flagged',
+        'flagged_reason',
+        'images',
     ];
 
     /**

@@ -37,4 +37,9 @@ class Listing extends Model
     {
         return $this->belongsToMany(Amenity::class);
     }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'owner_id');
+    }
 }

@@ -10,15 +10,20 @@ class Booking extends Model
     use HasFactory;
     protected $fillable = 
     [
-        'client_id', 'property_id', 'check_in_date', 'check_out_date', 'total_charges', 'booking_status', 'guest_count', 'special_requests', 'payment_status', 'payment_method', 'booking_code'
+        'client_id','phone_number', 'email', 'listing_id', 'check_in_date', 'check_out_date', 'total_charges', 'booking_status', 'guest_count', 'special_requests', 'payment_status', 'payment_method', 'booking_code'
+    ];
+
+    protected $casts =[
+        'check_in_date' => 'datetime',
+        'check_out_date' => 'datetime'
     ];
 
     public function account()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Account::class, 'client_id');
     }
-    public function proprty()
+    public function listing()
     {
-        return $this->hasOne(Listing::class);
+        return $this->belongsTo(Listing::class);
     }
 }

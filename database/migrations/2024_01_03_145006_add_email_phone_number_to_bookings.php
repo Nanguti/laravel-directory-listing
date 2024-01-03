@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amenity_listing', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('listing_id')->constrained('listings')->cascadeOnDelete();
-            $table->foreignId('amenity_id')->constrained('amenities')->cascadeOnDelete();
-            $table->timestamps();
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->string('email');
+            $table->integer('phone_number');
         });
     }
 
@@ -24,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('listing_amenity');
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->string('email');
+            $table->integer('phone_number');
+        });
     }
 };

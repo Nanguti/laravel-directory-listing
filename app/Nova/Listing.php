@@ -4,10 +4,12 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Listing extends Resource
@@ -24,7 +26,7 @@ class Listing extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -53,7 +55,7 @@ class Listing extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->sortbale()->required(),
+            Text::make('Name')->required(),
             BelongsTo::make('AccommodationType'),
             BelongsTo::make('Account'),
             Textarea::make('Description'),
@@ -61,7 +63,8 @@ class Listing extends Resource
             Text::make('City')->nullable(),
             Text::make('County')->required(),
             Text::make('Country')->nullable(),
-            HasMany::make('Amenities'),
+            Image::make('Main Image')->required(),
+            BelongsToMany::make('Amenities'),
 
         ];
     }

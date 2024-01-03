@@ -23,9 +23,7 @@ class RatingReview extends Model
         'reported_count',
         'flagged',
         'flagged_reason',
-        'images',
-        'created_at',
-        'updated_at',
+        'images',    
     ];
 
 }

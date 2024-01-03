@@ -26,15 +26,17 @@ class Booking extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
 
+     public function title(){
+        return __('Account');
+     }
     /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'id', 'client_id', 'property_id', 'check_in_date', 'check_out_date', 'total_charges', 'booking_status', 'guest_count', 'special_requests', 'payment_status', 'payment_method', 'booking_code'
+        'id', 'accommodation_type', 'check_in_date', 'check_out_date', 'total_charges', 'booking_status', 'guest_count', 'special_requests', 'payment_status', 'payment_method', 'booking_code'
     ];
 
     /**
@@ -49,9 +51,10 @@ class Booking extends Resource
             ID::make()->sortable(),
             BelongsTo::make('Account'),
             BelongsTo::make('Listing'),
-            DateTime::make('Check In Date'),
-            DateTime::make('Check Out Date'),
-            Number::make('Phone Number'),
+            DateTime::make('Check In Date')->required(),
+            DateTime::make('Check Out Date')->required(),
+            Number::make('Phone Number')->required(),
+            Text::make('Email')->required(),
             Select::make('Booking Status')->options([
                 'pending' => 'Pending',
                 'Cancelled' => 'Cancelled',
@@ -64,11 +67,12 @@ class Booking extends Resource
                 'Pending' => 'Pending',
                 'Failed' => 'Failed'
             ]),
-            Select::make('Payment Mathod')->options([
+            Select::make('Payment Method')->options([
                 'Cash' => 'Cash',
                 'Mpesa' => 'Mpesa',
                 'Credit Card' => 'Credit Card',
-            ]),
+            ])->required(),
+            Number::make('Total Charges'),
             Text::make('Booking Code')
         ];
     }
