@@ -53,3 +53,6 @@ Route::post('/category/posts', [PostController::class,'postsByCategory']);
 
 Route::post('/account/login', [AuthController::class, 'login']);
 Route::post('/account/signup', [AuthController::class, 'signup']);
+
+
+Route::get('/amenities', [ListingController::class, 'amenities']);

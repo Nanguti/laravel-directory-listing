@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Nova\AccommodationType;
 use App\Nova\Account;
+use App\Nova\Amenity;
 use App\Nova\Booking;
 use App\Nova\Category;
 use App\Nova\Comment;
@@ -44,6 +45,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make('Listings', [
                     MenuItem::resource(AccommodationType::class),
                     MenuItem::resource(Listing::class),
+                    MenuItem::resource(Amenity::class),
                     MenuItem::resource(Booking::class),                    
                     MenuItem::resource(RatingReview::class),
                 ])->icon('document-text')->collapsable(),

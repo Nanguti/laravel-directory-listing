@@ -6,6 +6,7 @@ use App\Models\Listing;
 use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
 use App\Models\PropertyImage;
+use App\Models\Amenity;
 use Cloudinary\Cloudinary;
 
 class ListingController extends Controller
@@ -61,5 +62,12 @@ class ListingController extends Controller
         $listing->delete();
 
         return response()->json(['message' => 'Listing deleted successfully']);
+    }
+
+    public function amenities(){
+        $amenities = Amenity::all();
+        return response()->json([
+            'amenities' => $amenities
+        ]);
     }
 }
